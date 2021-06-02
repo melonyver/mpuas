@@ -5,6 +5,8 @@
   $isValid = false;
   if(empty($_SESSION['username'])){
     $isValid = false;
+  }else if($_SESSION['role'] == "Admin"){
+    $isValid = false;
   }else{
     $isValid = true;
   }
@@ -24,7 +26,7 @@
     <!-- header -->
     <div class="header">
         <img src="logoku.png" alt="">
-        <a href="#default" class="logo">JD'BOOKS</a>
+        <a href="index.php" class="logo">JD'BOOKS</a>
         <div class="header-right">
             <a href="logout.php">Keluar</a>
             <a href="#about">Daftar</a>

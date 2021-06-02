@@ -5,9 +5,10 @@
   $isValid = false;
   if(empty($_SESSION['username'])){
     $isValid = false;
+  }else if($_SESSION['role'] == "User"){
+    $isValid = false;
   }else{
     $isValid = true;
-    //asjodhnasodhoausd
   }
 ?>
 
@@ -28,7 +29,7 @@
         <img src="logoku.png" alt="">
         <a href="#default" class="logo">JD'BOOKS</a>
         <div class="header-right">
-            <a href="#about">Tambah Data</a>
+            <a href="insert.php">Tambah Data</a>
             <a href="logout.php">Keluar</a>
         </div>
     </div>
