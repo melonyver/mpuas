@@ -29,13 +29,16 @@
         <img src="logoku.png" alt="">
         <?php if($role == "User"){?>
         <a href="index.php" class="logo">JD'BOOKS</a>
-        <?php }else{?>
-        <a href="admin.php" class="logo">JD'BOOKS</a>
-        <?php } ?>
         <div class="header-right">
             <a href="logout.php">Keluar</a>
-            <a href="#about">Daftar</a>
         </div>
+        <?php }else{?>
+        <a href="admin.php" class="logo">JD'BOOKS</a>
+        <div class="header-right">
+            <a href="logout.php">Keluar</a>
+        </div>
+        <?php } ?>
+        
     </div>
 
     <!-- navigasi -->
@@ -68,8 +71,8 @@
             <tr>
                 <td>
                     <h3>Coki Pardede & Tretan Muslim</h3>
-                    <h5>Kategori: <a href="#">Novel</a>, Tags: <a href="#">Non-fiksi</a>, <a href="#">Sosial &
-                            Politik</a>, <a href="#"> Motivasi</a></h5>
+                    <h5>Kategori: 
+                        <a href="#">Novel</a>, Tags: <a href="#">Non-fiksi</a>, <a href="#">Sosial & Politik</a>, <a href="#"> Motivasi</a></h5>
 
                     <p>Bukan Golongan Kami adalah kumpulan tulisan keresahan Coki & Muslim. Tak hanya soal jatuh bangun
                         karier mereka di panggung komedi Indonesia, buku ini menggali lebih jauh ke masa lalu yang
