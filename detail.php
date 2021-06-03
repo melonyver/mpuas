@@ -1,16 +1,51 @@
 <?php
-  include "connection.php";
-  session_start();
-
-  $isValid = false;
-  if(empty($_SESSION['username'])){
+    include "connection.php";
+    session_start();    
     $isValid = false;
-  }else{
-    $isValid = true;
-  }
-
-  $role = $_SESSION['role'];
-
+    if(empty($_SESSION['username'])){
+        $isValid = false;
+    }else{
+        $isValid = true;
+    }   
+    $role = $_SESSION['role'];
+    $isbn = $_GET["isbn"];
+    $query1 = "SELECT * FROM `book` WHERE isbn='$isbn'";
+    $query2 = "SELECT * FROM `detail` WHERE isbn='$isbn'";
+    $res1 = mysqli_query($conn, $query1);
+    $res2 = mysqli_query($conn, $query2);   
+    if($res1->num_rows > 0){
+        while($row1 = $res1->fetch_array()){
+            $title = $row1["title"];
+            $author = $row1["author"];
+            $category = $row1["category"];
+            $tag = $row1["tag"];
+            $bookDesc = $row1["bookDesc"];
+            $authDesc = $row1["authDesc"];
+            $rating = $row1["rating"];
+            $promo = $row1["promo"];
+            $price = $row1["price"];
+            $image = $row1["image"];
+        }
+    }
+    if($res2->num_rows > 0){
+        while($row2 = $res2->fetch_array()){
+            $format = $row2["format"];
+            $page = $row2["page"];
+            $dimension = $row2["dimension"];
+            $weight = $row2["weight"];
+            $dates = $row2["date"];
+            $publication = $row2["publication"];
+            $publisher = $row2["publisher"];
+            $city = $row2["city"];
+            $country = $row2["country"];
+            $language = $row2["language"];
+        }
+    }
+    $date = date_create($dates);
+    $tanggal = date_format($date, "d F Y");
+    $explodeTag = explode(",",$tag);
+    $countTag = count($explodeTag);
+    
 ?>
 
 <!DOCTYPE html>
@@ -29,15 +64,12 @@
         <img src="logoku.png" alt="">
         <?php if($role == "User"){?>
         <a href="index.php" class="logo">JD'BOOKS</a>
-        <div class="header-right">
-            <a href="logout.php">Keluar</a>
-        </div>
         <?php }else{?>
         <a href="admin.php" class="logo">JD'BOOKS</a>
+        <?php } ?>
         <div class="header-right">
             <a href="logout.php">Keluar</a>
         </div>
-        <?php } ?>
         
     </div>
 
@@ -58,33 +90,34 @@
 
     <!-- gambar buku -->
     <div class="columngambar">
-        <img class="gambarbuku" src="buku baru 4.jpg" alt="">
-        <a href=""><img class="detail" src="detail buku 2.jfif" alt=""></a>
-        <a href=""> <img class="detail" src="detail buku.jfif" alt=""></a>
+        <img class="gambarbuku" src="<?=$image?>" alt="">
+        <a href=""><img class="detail" src="<?=$image?>" alt=""></a>
+        <a href=""> <img class="detail" src="<?=$image?>" alt=""></a>
 
         <img src="" alt="">
     </div>
     <!-- kolom deskripsi -->
     <div class="columndeskripsi">
-        <h1 class="produk">Bukan Golongan Kami</h1>
+        <h1 class="produk"><?=$title?></h1>
         <table class="deskripsi">
             <tr>
                 <td>
-                    <h3>Coki Pardede & Tretan Muslim</h3>
+                    <h3><?=$author?></h3>
                     <h5>Kategori: 
-                        <a href="#">Novel</a>, Tags: <a href="#">Non-fiksi</a>, <a href="#">Sosial & Politik</a>, <a href="#"> Motivasi</a></h5>
-
-                    <p>Bukan Golongan Kami adalah kumpulan tulisan keresahan Coki & Muslim. Tak hanya soal jatuh bangun
-                        karier mereka di panggung komedi Indonesia, buku ini menggali lebih jauh ke masa lalu yang
-                        membuat cara mereka memaknai keberagaman hingga
-                        saat ini. Dua muka buku ini mewakili sudut pandang Coki dan Muslim hingga mereka akhirnya
-                        bertemu di tengah menjadi duo komedian paling dinanti saat ini.</p>
-                    <h2>Rating</h2>
-                    <img src="star-fill.svg" alt="">
-                    <img src="star-fill.svg" alt="">
-                    <img src="star-fill.svg" alt="">
-                    <img src="star-fill.svg" alt="">
-                    <img src="star.svg" alt="">
+                        <a href="#"><?=$category?></a>
+                        Tags:
+                        <?php
+                        foreach($explodeTag as $t){
+                            if($countTag==1){
+                                echo '<a href="#">'.$t.'</a></h5>';
+                            }else{
+                                echo '<a href="#">'.$t.'</a>, ';
+                            }
+                            $countTag--;
+                        }
+                        ?>
+                        
+                    <p><?=$bookDesc?></p>
                 </td>
             </tr>
         </table>
@@ -95,19 +128,19 @@
         <table class="deskripsi">
             <tr>
                 <td>
-                    <h2>Beli Bekas</h2>
-                    <h3>Rp 50.000,-</h3>
-                    <div class="belisekarang">
-                        <a href="#" class="tulisanbeli">Beli Sekarang</a>
-                        <a href="#" class="wishlist"><img src="heart.svg"> Tambah Wishlist</a>
-                    </div>
                     <h2>Beli Baru</h2>
-                    <h3>Rp 77.000,-</h3>
+                    <h3>Rp <?=number_format($price,2,",",".")?></h3>
                     <div class="belisekarang">
                         <a href="#" class="tulisanbeli">Sekarang</a>
                         <a href="#" class="wishlist"><img src="heart.svg"> Tambah Wishlist</a>
                     </div>
 
+                    <h2>Rating</h2>
+                    <img src="star-fill.svg" alt="">
+                    <img src="star-fill.svg" alt="">
+                    <img src="star-fill.svg" alt="">
+                    <img src="star-fill.svg" alt="">
+                    <img src="star.svg" alt="">
                 </td>
             </tr>
         </table>
@@ -119,25 +152,13 @@
         <table class="buku">
             <tr>
                 <td>
-                    <div class="kondisi">
-                        <h2>Kondisi</h2>
-                </td>
-                <td>
                     <h2>Tentang Penulis</h2>
                 </td>
                 <td>
-                </div>
     </tr>
     <tr>
         <td>
-            <p>BRAND NEW BOOK. Lebih dari 1,5 juta pelanggan yang puas. Jaminan uang kembali 100%. </p>
-        </td>
-        <td>
-            <p>Reza Pardede (lahir di Jakarta, Indonesia, 21 Januari 1988; umur 33 tahun), atau lebih dikenal sebagai
-                Coki Pardede, adalah seorang pelawak tunggal. Ia merupakan salah seorang kontestan ajang pencarian bakat
-                Stand Up Comedy Indonesia
-                Season 4 yang diselenggarakan oleh Kompas TV dan Stand Up Comedy Academy 2 yang diselenggarakan
-                Indosiar.</p>
+            <p><?=$authDesc?></p>
         </td>
 
     </tr>
@@ -153,30 +174,26 @@
                     <h2>Detail Produk</h2>
                 </td>
                 <td>
-                    <div id="jarak">
-
-                    </div>
+                    <div id="jarak"></div>
                 </td>
                 <td>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <h4>Format: Paperback | 208 pages</h4>
-                    <h4>Dimensi: 14cm x 20cm x 2cm | 430g</h4>
-                    <h4>Tanggal Publikasi: 26 Agustus 2019</h4>
-                    <h4>Tim Publikasi: Coki Parded & Tretan Muslim</h4>
-                    <h4>Penerbit: Bukune</h4>
+                    <h4>Format: <?=$format?> | <?=$page?> pages</h4>
+                    <h4>Dimensi: <?=$dimension?> | <?=$weight?>g</h4>
+                    <h4>Tanggal Publikasi: <?=$tanggal?></h4>
+                    <h4>Penerbit: <?=$publisher?></h4>
                 </td>
                 <td>
 
                 </td>
                 <td>
-                    <h4>Kota/Negara Publikasi: Jabodetabek, Indonesia</h4>
-                    <h4>Bahasa: Indonesia</h4>
-                    <h4>ISBN10: 0327267008228</h4>
-                    <h4>ISBN13: 9786022203278</h4>
-                    <h4>Ranking Bestseller: 666</h4>
+                    <h4>Kota/Negara Publikasi: <?=$city?>, <?=$country?></h4>
+                    <h4>Bahasa: <?=$language?></h4>
+                    <h4>Tim Publikasi: <?=$publication?></h4>
+                    <h4>ISBN13: <?=$isbn?></h4>
                 </td>
             </tr>
 

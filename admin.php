@@ -78,66 +78,41 @@
     <div class="columnbuku">
         <h2 class="produk">Buku Baru</h2>
         <table class="buku">
-            <tr class="tr-buku">
-                <td>
-                    <a href="detail.php"><img src="buku baru 1.jpg" alt=""></a>
-                </td>
-                <td class="kosong">
-                    <a href="detail.php">
-                        <img src="buku baru 2.jpg" alt="">
-                    </a>
-                </td>
-                <td>
-                    <a href="detail.php"><img src="buku baru 3.jpg" alt=""></a>
-
-                </td>
-                <td>
-                    <a href="detail.php"> <img src="buku baru 4.jpg" alt=""></a>
-
-                </td>
-                <td>
-                    <a href="detail.php"><img src="buku baru 5.jpg" alt=""></a>
-
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h3>One Piece 95</h3>
-                    <h5>Eichiro Oda</h5>
-                    <h4>Rp 21.000,-</h4>
-                    <h5><button class="btn-success">Update</button></h5>
-                    <h5><button class="btn-danger">Delete</button></h5>
-                </td>
-                <td>
-                    <h3>Perjamuan Khong Guan</h3>
-                    <h5>Joko Pinurbo</h5>
-                    <h4>Rp 68.000,-</h4>
-                    <h5><button class="btn-success">Update</button></h5>
-                    <h5><button class="btn-danger">Delete</button></h5>
-                </td>
-                <td>
-                    <h3>Nebula</h3>
-                    <h5>Tere Liye</h5>
-                    <h4>Rp 63.750,-</h4>
-                    <h5><button class="btn-success">Update</button></h5>
-                    <h5><button class="btn-danger">Delete</button></h5>
-                </td>
-                <td>
-                    <h3>Bukan Golongan Kami</h3>
-                    <h5>Coki Pardede & Tretan Muslim</h5>
-                    <h4>Rp 77.000,-</h4>
-                    <h5><button class="btn-success">Update</button></h5>
-                    <h5><button class="btn-danger">Delete</button></h5>
-                </td>
-                <td>
-                    <h3>Tapak Jejak</h3>
-                    <h5>Fiersa Besari</h5>
-                    <h4>Rp 74.800,-</h4>
-                    <h5><button class="btn-success">Update</button></h5>
-                    <h5><button class="btn-danger">Delete</button></h5>
-                </td>
-
-            </tr>
+        <tr class="tr-buku">
+            <?php    
+                $query = "SELECT * FROM `book` WHERE promo LIKE '%baru%' ORDER BY title LIMIT 5";
+                $res = mysqli_query($conn, $query);
+                if($res->num_rows > 0){
+                    while($row = $res->fetch_array()){
+                        echo
+                        '
+                            <td>
+                                <a href="detail.php?isbn='.$row["isbn"].'"><img src="'.$row["image"].'" alt=""></a>
+                            </td>
+                        ';
+                    }
+                }
+            ?>
+        </tr>
+        <tr>
+            <?php
+                $res = mysqli_query($conn, $query);
+                if($res->num_rows > 0){
+                    while($row = $res->fetch_array()){
+                        echo
+                        '
+                            <td>
+                                <h3>'.$row["title"].'</h3>
+                                <h5>'.$row["author"].'</h5>
+                                <h4>Rp '.number_format($row["price"],2,",",".").'</h4>
+                                <h5><a href="update.php?isbn='.$row["isbn"].'"><button class="btn-success">Update</button></a></h5>
+                                <h5><button class="btn-danger">Delete</button></h5>
+                            </td>
+                        ';
+                    }
+                }
+            ?>
+        </tr>
         </table>
 
     </div>
@@ -147,64 +122,39 @@
         <h2 class="produk">Buku-Buku Terpopuler</h2>
         <table class="buku">
             <tr class="tr-buku">
-                <td>
-                    <a href="detail.php"><img src="buku1.jpg" alt=""></a>
-
-                </td>
-                <td>
-                    <a href="detail.php"><img src="buku pop 2.jpg" alt=""></a>
-
-                </td>
-                <td>
-                    <a href="detail.php"><img src="buku pop 3.jpg" alt=""></a>
-
-                </td>
-                <td>
-                    <a href="detail.php"><img src="buku pop 4.jpg" alt=""></a>
-
-                </td>
-                <td>
-                    <a href="detail.php"><img src="buku pop 5.jpg" alt=""></a>
-
-                </td>
+                <?php    
+                    $query = "SELECT * FROM `book` WHERE promo LIKE '%populer%' ORDER BY title LIMIT 5";
+                    $res = mysqli_query($conn, $query);
+                    if($res->num_rows > 0){
+                        while($row = $res->fetch_array()){
+                            echo
+                            '
+                                <td>
+                                    <a href="detail.php?isbn='.$row["isbn"].'"><img src="'.$row["image"].'" alt=""></a>
+                                </td>
+                            ';
+                        }
+                    }
+                ?>
             </tr>
             <tr>
-                <td>
-                    <h3>Smart Traders Not Gamblers</h3>
-                    <h5>Ellen May</h5>
-                    <h4>Rp 73.500,-</h4>
-                    <h5><button class="btn-success">Update</button></h5>
-                    <h5><button class="btn-danger">Delete</button></h5>
-                </td>
-                <td>
-                    <h3>Harry Potter and the Prisoner of Azkaban</h3>
-                    <h5>J.K. Rowling</h5>
-                    <h4>Rp 401.250,-</h4>
-                    <h5><button class="btn-success">Update</button></h5>
-                    <h5><button class="btn-danger">Delete</button></h5>
-                </td>
-                <td>
-                    <h3>Dilan : Dia Adalah Dilanku Tahun 1990</h3>
-                    <h5>Pidi Baiq</h5>
-                    <h4>Rp 40.000,-</h4>
-                    <h5><button class="btn-success">Update</button></h5>
-                    <h5><button class="btn-danger">Delete</button></h5>
-                </td>
-                <td>
-                    <h3>Pulang</h3>
-                    <h5>Tere Liye</h5>
-                    <h4>Rp 71.200,-</h4>
-                    <h5><button class="btn-success">Update</button></h5>
-                    <h5><button class="btn-danger">Delete</button></h5>
-                </td>
-                <td>
-                    <h3>Bumi Manusia</h3>
-                    <h5>Pramoedya Ananta Toer</h5>
-                    <h4>Rp 132.000,-</h4>
-                    <h5><button class="btn-success">Update</button></h5>
-                    <h5><button class="btn-danger">Delete</button></h5>
-                </td>
-
+                <?php
+                    $res = mysqli_query($conn, $query);
+                    if($res->num_rows > 0){
+                        while($row = $res->fetch_array()){
+                            echo
+                            '
+                                <td>
+                                    <h3>'.$row["title"].'</h3>
+                                    <h5>'.$row["author"].'</h5>
+                                    <h4>Rp '.number_format($row["price"],2,",",".").'</h4>
+                                    <h5><a href="update.php?isbn='.$row["isbn"].'"><button class="btn-success">Update</button></a></h5>
+                                    <h5><button class="btn-danger">Delete</button></h5>
+                                </td>
+                            ';
+                        }
+                    }
+                ?>
             </tr>
         </table>
     </div>
@@ -258,64 +208,39 @@
         <h2 class="produk">Buku-Buku Terlaris</h2>
         <table class="buku">
             <tr class="tr-buku">
-                <td>
-                    <a href="detail.php"> <img src="buku laris 1.jpg" alt=""></a>
-
-                </td>
-                <td>
-                    <a href="detail.php"><img src="buku laris 2.jpg" alt=""></a>
-
-                </td>
-                <td>
-                    <a href="detail.php"><img src="buku laris 3.jpg" alt=""></a>
-
-                </td>
-                <td>
-                    <a href="detail.php"> <img src="buku laris 4.jpg" alt=""></a>
-
-                </td>
-                <td>
-                    <a href="detail.php"><img src="buku laris 5.jpg" alt=""></a>
-
-                </td>
+                <?php    
+                    $query = "SELECT * FROM `book` WHERE promo LIKE '%laris%' ORDER BY title LIMIT 5";
+                    $res = mysqli_query($conn, $query);
+                    if($res->num_rows > 0){
+                        while($row = $res->fetch_array()){
+                            echo
+                            '
+                                <td>
+                                    <a href="detail.php?isbn='.$row["isbn"].'"><img src="'.$row["image"].'" alt=""></a>
+                                </td>
+                            ';
+                        }
+                    }
+                ?>
             </tr>
             <tr>
-                <td>
-                    <h3>Nanti Kita Cerita Tentang Hari Ini</h3>
-                    <h5>Marchella FP</h5>
-                    <h4>Rp 125.000,-</h4>
-                    <h5><button class="btn-success">Update</button></h5>
-                    <h5><button class="btn-danger">Delete</button></h5>
-                </td>
-                <td>
-                    <h3>Orang-orang Biasa</h3>
-                    <h5>Andrea Hirata</h5>
-                    <h4>Rp 89.000,-</h4>
-                    <h5><button class="btn-success">Update</button></h5>
-                    <h5><button class="btn-danger">Delete</button></h5>
-                </td>
-                <td>
-                    <h3>Ronggeng Dukuh Paruk</h3>
-                    <h5>Ahmad Tohari</h5>
-                    <h4>Rp 88.000,-</h4>
-                    <h5><button class="btn-success">Update</button></h5>
-                    <h5><button class="btn-danger">Delete</button></h5>
-                </td>
-                <td>
-                    <h3>Aku Ini Binatang Jalang</h3>
-                    <h5>Chairil Anwar</h5>
-                    <h4>Rp 20.000,-</h4>
-                    <h5><button class="btn-success">Update</button></h5>
-                    <h5><button class="btn-danger">Delete</button></h5>
-                </td>
-                <td>
-                    <h3>Negeri 5 Menara</h3>
-                    <h5>Ahmad Fuadi</h5>
-                    <h4>Rp 98.000,-</h4>
-                    <h5><button class="btn-success">Update</button></h5>
-                    <h5><button class="btn-danger">Delete</button></h5>
-                </td>
-
+                <?php
+                    $res = mysqli_query($conn, $query);
+                    if($res->num_rows > 0){
+                        while($row = $res->fetch_array()){
+                            echo
+                            '
+                                <td>
+                                    <h3>'.$row["title"].'</h3>
+                                    <h5>'.$row["author"].'</h5>
+                                    <h4>Rp '.number_format($row["price"],2,",",".").'</h4>
+                                    <h5><a href="update.php?isbn='.$row["isbn"].'"><button class="btn-success">Update</button></a></h5>
+                                    <h5><button class="btn-danger">Delete</button></h5>
+                                </td>
+                            ';
+                        }
+                    }
+                ?>
             </tr>
         </table>
     </div>
