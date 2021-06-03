@@ -50,19 +50,18 @@
     <!-- kolom kategori -->
     <div class="vertical-menu">
         <h2>Kategori Buku</h2>
-        <a href="category.php?category=1" class="nama1">Agama & Filsafat</a>
-        <a href="#" class="nama1">Buku Anak</a>
-        <a href="#" class="nama1">Ensiklopedia</a>
-        <a href="#" class="nama1">Fiksi dan Literatur</a>
-        <a href="#" class="nama1">Hobby & Teknologi Tepat Guna</a>
-        <a href="#" class="nama1">Kesehatan</a>
-        <a href="#" class="nama1">Komik</a>
-        <a href="#" class="nama1">Lifestyle</a>
-        <a href="#" class="nama1">Motivasi & Bisnis</a>
-        <a href="#" class="nama1">Novel</a>
-        <a href="#" class="nama1">Perguruan Tinggi</a>
-        <a href="#" class="nama1">Sosial, Politik, Budaya, Sejarah</a>
-        <a href="#" class="nama1">Tes & Psikotes</a>
+        <?php    
+            $query = "SELECT * FROM `category`";
+            $res = mysqli_query($conn, $query);
+            if($res->num_rows > 0){
+                while($row = $res->fetch_array()){
+                    echo
+                    '
+                    <a href="category.php?id='.$row["id"].'" class="nama1">'.$row["category"].'</a>
+                    ';
+                }
+            }
+        ?>
     </div>
 
 

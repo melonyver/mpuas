@@ -19,9 +19,12 @@
             $author = $row1["author"];
             $category = $row1["category"];
             $tag = $row1["tag"];
+            $explodeTag = explode(",",$tag);
+            $countTag = count($explodeTag);
             $bookDesc = $row1["bookDesc"];
             $authDesc = $row1["authDesc"];
             $rating = $row1["rating"];
+            $emptyRating = 5 - $rating;
             $promo = $row1["promo"];
             $price = $row1["price"];
             $image = $row1["image"];
@@ -39,13 +42,10 @@
             $city = $row2["city"];
             $country = $row2["country"];
             $language = $row2["language"];
+            $date = date_create($dates);
+            $tanggal = date_format($date, "d F Y");
         }
     }
-    $date = date_create($dates);
-    $tanggal = date_format($date, "d F Y");
-    $explodeTag = explode(",",$tag);
-    $countTag = count($explodeTag);
-    
 ?>
 
 <!DOCTYPE html>
@@ -96,6 +96,7 @@
 
         <img src="" alt="">
     </div>
+
     <!-- kolom deskripsi -->
     <div class="columndeskripsi">
         <h1 class="produk"><?=$title?></h1>
@@ -116,15 +117,14 @@
                             $countTag--;
                         }
                         ?>
-                        
                     <p><?=$bookDesc?></p>
                 </td>
             </tr>
         </table>
     </div>
-    <!-- kolom beli-->
-    <div class="columnbeli">
 
+    <!-- kolom beli dan rating-->
+    <div class="columnbeli">
         <table class="deskripsi">
             <tr>
                 <td>
@@ -136,11 +136,16 @@
                     </div>
 
                     <h2>Rating</h2>
-                    <img src="star-fill.svg" alt="">
-                    <img src="star-fill.svg" alt="">
-                    <img src="star-fill.svg" alt="">
-                    <img src="star-fill.svg" alt="">
-                    <img src="star.svg" alt="">
+                    <?php
+                        while($rating > 0){
+                            echo '<img src="star-fill.svg" alt="">';
+                            $rating--;
+                        }
+                        while($emptyRating > 0){
+                            echo '<img src="star.svg" alt="">';
+                            $emptyRating--;
+                        }
+                    ?>
                 </td>
             </tr>
         </table>
@@ -154,18 +159,15 @@
                 <td>
                     <h2>Tentang Penulis</h2>
                 </td>
+            </tr>
+            <tr>
                 <td>
-    </tr>
-    <tr>
-        <td>
-            <p><?=$authDesc?></p>
-        </td>
-
-    </tr>
-
-    </table>
-
+                    <p><?=$authDesc?></p>
+                </td>
+            </tr>
+        </table>
     </div>
+    
     <!-- kolom detil produk -->
     <div class="detailproduk">
         <table class="buku">
@@ -175,8 +177,6 @@
                 </td>
                 <td>
                     <div id="jarak"></div>
-                </td>
-                <td>
                 </td>
             </tr>
             <tr>
@@ -196,10 +196,10 @@
                     <h4>ISBN13: <?=$isbn?></h4>
                 </td>
             </tr>
-
         </table>
         <br>
     </div>
+
     <!-- kolom footer  -->
     <div class="footer">
         <br>
