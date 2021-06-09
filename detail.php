@@ -13,7 +13,7 @@
         $query1 = "SELECT * FROM `book` WHERE isbn='$isbn'";
         $query2 = "SELECT * FROM `detail` WHERE isbn='$isbn'";
         $res1 = mysqli_query($conn, $query1);
-        $res2 = mysqli_query($conn, $query2);   
+        $res2 = mysqli_query($conn, $query2);  
         if($res1->num_rows > 0){
             while($row1 = $res1->fetch_array()){
                 $title = $row1["title"];
@@ -29,6 +29,13 @@
                 $promo = $row1["promo"];
                 $price = $row1["price"];
                 $image = $row1["image"];
+            }
+            $query3 = "SELECT id FROM `category` WHERE category='$category'";
+            $res3 = mysqli_query($conn, $query3);
+            if($res3->num_rows > 0){
+                while($row3 = $res3->fetch_array()){
+                    $id = $row3["id"];
+                }
             }
         }
         if($res2->num_rows > 0){
@@ -101,7 +108,7 @@
                 <td>
                     <h3><?=$author?></h3>
                     <h5>Kategori: 
-                        <a href="category.php?category=<?=$category?>"><?=$category?></a>
+                        <a href="category.php?category=<?=$category?>&id=<?=$id?>"><?=$category?></a>
                         Tags:
                         <?php
                         foreach($explodeTag as $t){

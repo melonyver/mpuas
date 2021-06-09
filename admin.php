@@ -105,7 +105,7 @@
                                 <h5>'.$row["author"].'</h5>
                                 <h4>Rp '.number_format($row["price"],2,",",".").'</h4>
                                 <h5><a href="update.php?isbn='.$row["isbn"].'"><button class="btn-success">Update</button></a></h5>
-                                <h5><button class="btn-danger">Delete</button></h5>
+                                <h5><a href="delete.php?isbn='.$row["isbn"].'" onclick="return confirm(\'Mau dihapus?\')"><button class="btn-danger">Delete</button></a></h5>
                             </td>
                         ';
                     }
@@ -148,7 +148,7 @@
                                     <h5>'.$row["author"].'</h5>
                                     <h4>Rp '.number_format($row["price"],2,",",".").'</h4>
                                     <h5><a href="update.php?isbn='.$row["isbn"].'"><button class="btn-success">Update</button></a></h5>
-                                    <h5><button class="btn-danger">Delete</button></h5>
+                                    <h5><a href="delete.php?isbn='.$row["isbn"].'" onclick="return confirm(\'Mau dihapus?\')"><button class="btn-danger">Delete</button></a></h5>
                                 </td>
                             ';
                         }
@@ -234,7 +234,7 @@
                                     <h5>'.$row["author"].'</h5>
                                     <h4>Rp '.number_format($row["price"],2,",",".").'</h4>
                                     <h5><a href="update.php?isbn='.$row["isbn"].'"><button class="btn-success">Update</button></a></h5>
-                                    <h5><button class="btn-danger">Delete</button></h5>
+                                    <h5><a href="delete.php?isbn='.$row["isbn"].'" onclick="return confirm(\'Mau dihapus?\')"><button class="btn-danger">Delete</button></a></h5>
                                 </td>
                             ';
                         }
