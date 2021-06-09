@@ -6,51 +6,47 @@
         $isValid = false;
     }else{
         $isValid = true;
-    }   
-    $role = $_SESSION['role'];
-    $isbn = $_GET["isbn"];
-    $query1 = "SELECT * FROM `book` WHERE isbn='$isbn'";
-    $query2 = "SELECT * FROM `detail` WHERE isbn='$isbn'";
-    $res1 = mysqli_query($conn, $query1);
-    $res2 = mysqli_query($conn, $query2);   
-    if($res1->num_rows > 0){
-        while($row1 = $res1->fetch_array()){
-            $title = $row1["title"];
-            $author = $row1["author"];
-            $category = $row1["category"];
-            $tag = $row1["tag"];
-            $explodeTag = explode(",",$tag);
-            $countTag = count($explodeTag);
-            $bookDesc = $row1["bookDesc"];
-            $authDesc = $row1["authDesc"];
-            $rating = $row1["rating"];
-            $emptyRating = 5 - $rating;
-            $promo = $row1["promo"];
-            $price = $row1["price"];
-            $image = $row1["image"];
-        }
     }
-    if($res2->num_rows > 0){
-        while($row2 = $res2->fetch_array()){
-            $format = $row2["format"];
-            $page = $row2["page"];
-            $dimension = $row2["dimension"];
-            $weight = $row2["weight"];
-            $dates = $row2["date"];
-            $publication = $row2["publication"];
-            $publisher = $row2["publisher"];
-            $city = $row2["city"];
-            $country = $row2["country"];
-            $language = $row2["language"];
-            $date = date_create($dates);
-            $tanggal = date_format($date, "d F Y");
+    if(isset($_GET["isbn"])){
+        $role = $_SESSION['role'];
+        $isbn = $_GET["isbn"];
+        $query1 = "SELECT * FROM `book` WHERE isbn='$isbn'";
+        $query2 = "SELECT * FROM `detail` WHERE isbn='$isbn'";
+        $res1 = mysqli_query($conn, $query1);
+        $res2 = mysqli_query($conn, $query2);   
+        if($res1->num_rows > 0){
+            while($row1 = $res1->fetch_array()){
+                $title = $row1["title"];
+                $author = $row1["author"];
+                $category = $row1["category"];
+                $tag = $row1["tag"];
+                $explodeTag = explode(",",$tag);
+                $countTag = count($explodeTag);
+                $bookDesc = $row1["bookDesc"];
+                $authDesc = $row1["authDesc"];
+                $rating = $row1["rating"];
+                $emptyRating = 5 - $rating;
+                $promo = $row1["promo"];
+                $price = $row1["price"];
+                $image = $row1["image"];
+            }
         }
+        if($res2->num_rows > 0){
+            while($row2 = $res2->fetch_array()){
+                $page = $row2["page"];
+                $dimension = $row2["dimension"];
+                $weight = $row2["weight"];
+                $publisher = $row2["publisher"];
+                $country = $row2["country"];
+            }
+        }
+    }else{
+        $isValid = false;
     }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <title>Detail Produk</title>
     <link rel="stylesheet" href="detail.css">
@@ -105,7 +101,7 @@
                 <td>
                     <h3><?=$author?></h3>
                     <h5>Kategori: 
-                        <a href="#"><?=$category?></a>
+                        <a href="category.php?category=<?=$category?>"><?=$category?></a>
                         Tags:
                         <?php
                         foreach($explodeTag as $t){
@@ -181,18 +177,15 @@
             </tr>
             <tr>
                 <td>
-                    <h4>Format: <?=$format?> | <?=$page?> pages</h4>
+                    <h4>Format: <?=$page?> pages</h4>
                     <h4>Dimensi: <?=$dimension?> | <?=$weight?>g</h4>
-                    <h4>Tanggal Publikasi: <?=$tanggal?></h4>
                     <h4>Penerbit: <?=$publisher?></h4>
                 </td>
                 <td>
 
                 </td>
                 <td>
-                    <h4>Kota/Negara Publikasi: <?=$city?>, <?=$country?></h4>
-                    <h4>Bahasa: <?=$language?></h4>
-                    <h4>Tim Publikasi: <?=$publication?></h4>
+                    <h4>Negara Publikasi: <?=$country?></h4>
                     <h4>ISBN13: <?=$isbn?></h4>
                 </td>
             </tr>
