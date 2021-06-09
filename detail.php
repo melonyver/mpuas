@@ -84,8 +84,10 @@
         <a href="#">Buku Promo</a>
         <a href="#">Buku Terlaris</a>
         <div class="search-container">
-            <input type="text" placeholder="Temukan Bukumu">
-            <button type="submit">Cari</button>
+            <form action="cari.php" method="get">
+                <input type="text" name="textCari" placeholder="Temukan Bukumu">
+                <button type="submit" name="submitCari" value="search">Cari</button>
+            </form>
         </div>
     </div>
 

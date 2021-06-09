@@ -9,7 +9,9 @@
 
         if($result > 0){
             $temp = mysqli_fetch_assoc($res);
-            if($_POST['username'] == $temp['username'] && $_POST['password'] == $temp['password']){
+            $username = mysqli_real_escape_string($conn, $_POST['username']);
+            $password = mysqli_real_escape_string($conn, $_POST['password']);
+            if($username == $temp['username'] && $password == $temp['password']){
                 session_start();
                 $_SESSION['username'] = $temp['username'];
                 $_SESSION['role'] = $temp['role'];
@@ -83,7 +85,6 @@
         }else if($_SESSION['role'] == "Admin"){
             header("Location: admin.php");
         }
-        
     }
     ?>
   </body>
