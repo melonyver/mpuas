@@ -8,9 +8,14 @@
         $isValid = true;
     }
     $role = $_SESSION['role'];
-    if($_GET["textCari"]){
-        $keyword = $_GET["textCari"];
+    if($_GET){
+        if($_GET["textCari"]){
+            $keyword = $_GET["textCari"];
+        }
+    }else{
+        $isValid = false;
     }
+    
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +45,11 @@
 
     <!-- navigasi -->
     <div class="topnav">
-        <a class="active" href="#">Home</a>
+    <?php if($role == "User"){?>
+        <a href="index.php">Home</a>
+    <?php }else{?>
+        <a href="admin.php">Home</a>
+    <?php } ?>
         <a href="#">Buku Baru</a>
         <a href="#">Semua Buku</a>
         <a href="#">Buku Promo</a>

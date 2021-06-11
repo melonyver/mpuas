@@ -6,8 +6,10 @@
   if(empty($_SESSION['username'])){
     $isValid = false;
   }else if($_SESSION['role'] == "User"){
+    $role = $_SESSION['role'];
     $isValid = false;
   }else{
+    $role = $_SESSION['role'];
     $isValid = true;
   }
 ?>
@@ -35,8 +37,11 @@
     </div>
 
     <!-- navigasi -->
-    <div class="topnav">
-        <a class="active" href="#">Home</a>
+    <div class="topnav"><?php if($role == "User"){?>
+        <a class="active" href="index.php">Home</a>
+    <?php }else{?>
+        <a class="active" href="admin.php">Home</a>
+    <?php } ?>
         <a href="#">Buku Baru</a>
         <a href="#">Semua Buku</a>
         <a href="#">Buku Promo</a>

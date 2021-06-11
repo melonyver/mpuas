@@ -142,7 +142,7 @@
             <textarea class="form-control mx-auto" name="authDesc" rows="3" cols="95" required></textarea>
 
             <label for="rating" class="form-label"> Rating : </label>
-            <input type="float" class="form-control" name="rating" min=1 max=5 required>
+            <input type="number" class="form-control" name="rating" min=1 max=5 required>
 
             <label for="promo" class="form-label"> Promo : </label>
             <div class="d-inline-block">
