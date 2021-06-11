@@ -81,7 +81,7 @@
         <table class="buku">
         <tr class="tr-buku">
             <?php    
-                $query = "SELECT * FROM `book` WHERE promo LIKE '%baru%' ORDER BY title LIMIT 5";
+                $query = "SELECT * FROM `book` WHERE promo LIKE '%baru%' ORDER BY isbn DESC LIMIT 5";
                 $res = mysqli_query($conn, $query);
                 if($res->num_rows > 0){
                     while($row = $res->fetch_array()){
@@ -124,7 +124,7 @@
         <table class="buku">
             <tr class="tr-buku">
                 <?php    
-                    $query = "SELECT * FROM `book` WHERE promo LIKE '%populer%' ORDER BY title LIMIT 5";
+                    $query = "SELECT * FROM `book` WHERE promo LIKE '%populer%' ORDER BY isbn DESC LIMIT 5";
                     $res = mysqli_query($conn, $query);
                     if($res->num_rows > 0){
                         while($row = $res->fetch_array()){
@@ -210,7 +210,7 @@
         <table class="buku">
             <tr class="tr-buku">
                 <?php    
-                    $query = "SELECT * FROM `book` WHERE promo LIKE '%laris%' ORDER BY title LIMIT 5";
+                    $query = "SELECT * FROM `book` WHERE promo LIKE '%laris%' ORDER BY isbn DESC LIMIT 5";
                     $res = mysqli_query($conn, $query);
                     if($res->num_rows > 0){
                         while($row = $res->fetch_array()){
