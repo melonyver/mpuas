@@ -109,7 +109,7 @@
                                 <td>
                                     <h3>'.$row["title"].'</h3>
                                     <h5>'.$row["author"].'</h5>
-                                    <h4>Rp '.number_format($row["price"],2,",",".").'</h4>
+                                    <h4>Rp '.number_format($row["price"],0,",",".").',-</h4>
                                 </td>
                             ';
                         }
@@ -150,7 +150,7 @@
                                 <td>
                                     <h3>'.$row["title"].'</h3>
                                     <h5>'.$row["author"].'</h5>
-                                    <h4>Rp '.number_format($row["price"],2,",",".").'</h4>
+                                    <h4>Rp '.number_format($row["price"],0,",",".").',-</h4>
                                 </td>
                             ';
                         }
@@ -234,7 +234,7 @@
                                 <td>
                                     <h3>'.$row["title"].'</h3>
                                     <h5>'.$row["author"].'</h5>
-                                    <h4>Rp '.number_format($row["price"],2,",",".").'</h4>
+                                    <h4>Rp '.number_format($row["price"],0,",",".").',-</h4>
                                 </td>
                             ';
                         }

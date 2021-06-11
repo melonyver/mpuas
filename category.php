@@ -123,7 +123,7 @@
                 <td class="td-category">
                     <h3><?=$d["title"]?></h3>
                     <h5><?=$d["author"]?></h5>
-                    <h4>Rp<?= number_format($d["price"],2,",",".")?></h4>
+                    <h4>Rp<?= number_format($d["price"],0,",",".")?>,-</h4>
                     <?php if($role == "Admin"){?>
                         <h5><a href="update.php?isbn=<?=$d["isbn"]?>"><button class="btn-success">Update</button></a></h5>
                         <h5><a href="delete.php?isbn=<?=$d["isbn"]?>" onclick="return confirm('Mau dihapus?')"><button class="btn-danger">Delete</button></a></h5>
