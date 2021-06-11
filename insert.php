@@ -67,7 +67,7 @@
                 $publisher = $_POST['publisher'];
                 $country = $_POST['country'];
                 if(move_uploaded_file($_FILES['image']['tmp_name'], $path)){
-                    $query1 = "INSERT INTO book VALUES ('".$isbn."', '".$title."', '".$author."', '".$category."', '".$tag."', '".$bookDesc."', '".$authDesc."', '".$rating."', '".$promo."', '".$price."', '".$path."')";
+                    $query1 = "INSERT INTO book VALUES ('".$isbn."', '', '".$title."', '".$author."', '".$category."', '".$tag."', '".$bookDesc."', '".$authDesc."', '".$rating."', '".$promo."', '".$price."', '".$path."')";
                     $query2 = "INSERT INTO detail VALUES ('', '".$isbn."', '".$page."', '".$dimension."', '".$weight."', '".$publisher."', '".$country."')";
                     $result1 = mysqli_query($conn, $query1);
                     $result2 = mysqli_query($conn, $query2);
